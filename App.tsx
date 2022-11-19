@@ -10,6 +10,7 @@
 
 import React, {type PropsWithChildren} from 'react';
 import {
+  Button,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -26,6 +27,7 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import BooksApi from './src/api/openlibrary/books';
 
 const Section: React.FC<
   PropsWithChildren<{
@@ -81,6 +83,19 @@ const App = () => {
           <Section title="Step One">
             Edit <Text style={styles.highlight}>App.tsx</Text> to change this
             screen and then come back to see your edits.
+            <Button
+              title="test"
+              onPress={() => {
+                BooksApi()
+                  .trending()
+                  .then(data => {
+                    console.log('in view data', data);
+                  })
+                  .catch(error => {
+                    console.log('in view error', error);
+                  });
+              }}
+            />
           </Section>
           <Section title="See Your Changes">
             <ReloadInstructions />
