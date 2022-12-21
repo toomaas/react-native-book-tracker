@@ -1,8 +1,4 @@
-import {
-  Book,
-  TrendingBooksRawResponse,
-  TrendingBooksResponse,
-} from './books.types';
+import {Book, TrendingBooksRawResponse, TrendingBooksResponse} from './types';
 
 export enum TRENDING_SICE_ENUM {
   DAILY = 'daily',
