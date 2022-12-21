@@ -1,45 +1,9 @@
-// import {
-//     KEYCLOAK_GTFS_CLIENT_AUTH_URL,
-//     KEYCLOAK_GTFS_CLIENT_ID,
-//     KEYCLOAK_GTFS_CLIENT_SECRET,
-//     KEYCLOAK_REALM,
-//   } from '@env';
-
-// export enum GRANT_TYPE_ENUM {
-//   CLIENT_CREDENTIALS = 'client_credentials',
-//   PASSWORD = 'password',
-// }
-
 export enum TRENDING_SICE_ENUM {
   DAILY = 'daily',
   WEEKLY = 'weekly',
   FOREVER = 'forever',
   // monthly...
 }
-
-//   fetch('https://mywebsite.com/endpoint/', {
-//   method: 'POST',
-//   headers: {
-//     Accept: 'application/json',
-//     'Content-Type': 'application/json'
-//   },
-//   body: JSON.stringify({
-//     firstParam: 'yourValue',
-//     secondParam: 'yourOtherValue'
-//   })
-// });
-
-// const getMoviesFromApiAsync = async () => {
-//   try {
-//     const response = await fetch(
-//       'https://reactnative.dev/movies.json'
-//     );
-//     const json = await response.json();
-//     return json.movies;
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };
 
 const OPEN_LIBRARY_URL = 'https://openlibrary.org';
 
@@ -83,40 +47,6 @@ export default function BooksApi() {
 
       throw response;
     },
-    // async introspect(loginResponse: LoginResponse): Promise<LoginResponse> {
-    //   const body = {
-    //     token: loginResponse.access_token,
-    //     client_id: KEYCLOAK_GTFS_CLIENT_ID,
-    //     client_secret: KEYCLOAK_GTFS_CLIENT_SECRET,
-    //   };
-
-    //   const searchParams = Object.keys(body)
-    //     .map((key: string) => {
-    //       return `${encodeURIComponent(key)}=${encodeURIComponent(
-    //         // @ts-ignore
-    //         body[key],
-    //       )}`;
-    //     })
-    //     .join('&');
-
-    //   const response = await fetch(
-    //     `${KEYCLOAK_GTFS_CLIENT_AUTH_URL}/auth/realms/${KEYCLOAK_REALM}/protocol/openid-connect/token/introspect`,
-    //     {
-    //       method: 'POST',
-    //       headers: {
-    //         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-    //       },
-    //       body: searchParams,
-    //     },
-    //   );
-    //   if (response.status >= 200 && response.status < 300) {
-    //     return response.json().then((json: IntrospectResponse) => {
-    //       return {...loginResponse, introspect: json};
-    //     });
-    //   }
-
-    //   throw response;
-    // },
   };
 }
 export interface TrendingBooksRawResponse {
