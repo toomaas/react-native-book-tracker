@@ -37,9 +37,13 @@ export default function BooksApi() {
       );
       if (response.status >= 200 && response.status < 300) {
         return response.json().then((json: TrendingBooksRawResponse) => {
-          console.log(json);
+          const books: Book[] = json.works.map(work => ({
+            authors: work.author_name,
+            coverImageId: work.cover_i,
+            title: work.title,
+          }));
           const res: TrendingBooksResponse = {
-            books: [{author: 'abc', coverImageId: 123, title: 'dummy title'}],
+            books,
           };
           return res;
         });
@@ -55,6 +59,7 @@ export interface TrendingBooksRawResponse {
 }
 
 export interface Work {
+  author_name: string[];
   title: string;
   cover_i: number;
 }
@@ -66,5 +71,5 @@ export interface TrendingBooksResponse {
 export interface Book {
   title: string;
   coverImageId: number;
-  author: string;
+  authors: string[];
 }
