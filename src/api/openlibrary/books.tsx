@@ -1,3 +1,9 @@
+import {
+  Book,
+  TrendingBooksRawResponse,
+  TrendingBooksResponse,
+} from './books.types';
+
 export enum TRENDING_SICE_ENUM {
   DAILY = 'daily',
   WEEKLY = 'weekly',
@@ -52,24 +58,4 @@ export default function BooksApi() {
       throw response;
     },
   };
-}
-export interface TrendingBooksRawResponse {
-  query: string;
-  works: Work[];
-}
-
-export interface Work {
-  author_name: string[];
-  title: string;
-  cover_i: number;
-}
-
-export interface TrendingBooksResponse {
-  books: Book[];
-}
-
-export interface Book {
-  title: string;
-  coverImageId: number;
-  authors: string[];
 }
