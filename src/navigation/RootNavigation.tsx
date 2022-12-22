@@ -1,4 +1,8 @@
-import {NavigationContainer} from '@react-navigation/native';
+import {
+  DarkTheme,
+  DefaultTheme,
+  NavigationContainer,
+} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 import {StatusBar, useColorScheme} from 'react-native';
@@ -24,9 +28,13 @@ const RootNavigation: React.FunctionComponent = () => {
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={backgroundStyle.backgroundColor}
       />
-      <NavigationContainer>
+      <NavigationContainer theme={isDarkMode ? DarkTheme : DefaultTheme}>
         <Stack.Navigator>
-          <Stack.Screen name="HomeScreen" component={HomeScreen} />
+          <Stack.Screen
+            name="HomeScreen"
+            component={HomeScreen}
+            options={{headerShown: false}}
+          />
           <Stack.Screen name="BookScreen" component={BookScreen} />
         </Stack.Navigator>
       </NavigationContainer>

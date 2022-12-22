@@ -1,3 +1,4 @@
+import {useTheme} from '@react-navigation/native';
 import React, {useEffect} from 'react';
 import {Button, Text, View} from 'react-native';
 import BooksApi from '../../api/openlibrary/books';
@@ -6,11 +7,12 @@ import {HomeScreenProps} from './HomeScreen.types';
 
 const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
   const {navigation} = props;
+  const {colors} = useTheme();
   useEffect(() => {}, []);
 
   return (
     <View style={styles.container}>
-      <Text>Home Screen</Text>
+      <Text style={{color: colors.text}}>Home Screen</Text>
       <Button
         title="Get trending"
         onPress={() => {
