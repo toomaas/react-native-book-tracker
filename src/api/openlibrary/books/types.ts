@@ -8,13 +8,3 @@ export interface Work {
   title: string;
   cover_i: number;
 }
-
-export interface TrendingBooksResponse {
-  books: Book[];
-}
-
-export interface Book {
-  title: string;
-  coverImageId: number;
-  authors: string[];
-}

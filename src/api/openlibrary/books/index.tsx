@@ -1,4 +1,5 @@
-import {Book, TrendingBooksRawResponse, TrendingBooksResponse} from './types';
+import APITrendingBooksResponse from './response/APITrendingBooksResponse';
+import {TrendingBooksRawResponse} from './types';
 
 export enum TRENDING_SICE_ENUM {
   DAILY = 'daily',
@@ -14,7 +15,7 @@ export default function BooksApi() {
     async trending(
       limit: number = 5,
       since = TRENDING_SICE_ENUM.WEEKLY,
-    ): Promise<TrendingBooksResponse> {
+    ): Promise<APITrendingBooksResponse> {
       const searchParams = {
         limit,
       };
@@ -38,17 +39,8 @@ export default function BooksApi() {
         },
       );
       if (response.status >= 200 && response.status < 300) {
-        return response.json().then((json: TrendingBooksRawResponse) => {
-          const books: Book[] = json.works.map(work => ({
-            authors: work.author_name,
-            coverImageId: work.cover_i,
-            title: work.title,
-          }));
-          const res: TrendingBooksResponse = {
-            books,
-          };
-          return res;
-        });
+        const jsonResponse: TrendingBooksRawResponse = await response.json();
+        return new APITrendingBooksResponse(jsonResponse);
       }
 
       throw response;
