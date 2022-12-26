@@ -6,11 +6,10 @@ import {
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 import {StatusBar, useColorScheme} from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 import BookScreen from '../screens/Book';
 import HomeScreen from '../screens/Home';
 import {Colors} from '../styles';
-import styles from './RootNavigation.styles';
 import {RootNavigationParamList} from './RootNavigation.types';
 
 const RootNavigation: React.FunctionComponent = () => {
@@ -23,7 +22,7 @@ const RootNavigation: React.FunctionComponent = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaProvider>
       <StatusBar
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={backgroundStyle.backgroundColor}
@@ -38,7 +37,7 @@ const RootNavigation: React.FunctionComponent = () => {
           <Stack.Screen name="BookScreen" component={BookScreen} />
         </Stack.Navigator>
       </NavigationContainer>
-    </SafeAreaView>
+    </SafeAreaProvider>
   );
 };
 
