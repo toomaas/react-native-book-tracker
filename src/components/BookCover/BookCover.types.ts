@@ -1,4 +1,4 @@
-export type BookScreenProps = {
+export type BookCoverProps = {
   uri: string;
 };
 

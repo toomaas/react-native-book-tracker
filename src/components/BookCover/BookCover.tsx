@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {ActivityIndicator, Image} from 'react-native';
-import {BookScreenProps, ImageDimensions} from './BookCover.types';
+import {BookCoverProps, ImageDimensions} from './BookCover.types';
 
-const BookCover: React.FunctionComponent<BookScreenProps> = ({uri}) => {
+const BookCover: React.FunctionComponent<BookCoverProps> = ({uri}) => {
   const [dimensions, setDimensions] = useState<ImageDimensions>();
   const [loading, setLoading] = useState(true);
 
