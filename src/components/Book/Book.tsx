@@ -16,7 +16,7 @@ const Book: React.FunctionComponent<BookProps> = props => {
   return (
     <TouchableOpacity
       onPress={() => {
-        navigation.navigate('BookScreen');
+        navigation.navigate('BookScreen', {book});
       }}>
       <View style={{margin: 5, alignItems: 'center'}}>
         <BookCover
