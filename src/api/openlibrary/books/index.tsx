@@ -12,7 +12,7 @@ const OPEN_LIBRARY_URL = 'https://openlibrary.org';
 
 export default function BooksApi() {
   return {
-    async trending(
+    async listTrending(
       limit: number = 5,
       since = TRENDING_SICE_ENUM.WEEKLY,
     ): Promise<APITrendingBooksResponse> {
@@ -45,5 +45,6 @@ export default function BooksApi() {
 
       throw response;
     },
+    async,
   };
 }

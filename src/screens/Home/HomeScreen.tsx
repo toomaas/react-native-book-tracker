@@ -17,7 +17,7 @@ const HomeScreen: React.FunctionComponent<HomeScreenProps> = () => {
   useEffect(() => {
     (async () => {
       try {
-        const result = await BooksApi().trending();
+        const result = await BooksApi().listTrending();
         setBooks(result.books);
       } catch (error) {
         Alert.alert('Error fetching books', JSON.stringify(error));
