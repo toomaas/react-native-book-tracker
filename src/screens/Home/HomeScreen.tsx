@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 import {Alert, FlatList, Text} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import BooksApi from '../../api/openlibrary/books';
-import {Book} from '../../api/openlibrary/books/types';
+import Book from '../../api/openlibrary/books/model/Book';
 import BookComponent from '../../components/Book';
 
 import styles from './HomeScreen.styles';
