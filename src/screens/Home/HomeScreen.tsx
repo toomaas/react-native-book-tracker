@@ -1,10 +1,11 @@
 import {useTheme} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
-import {Alert, Button, FlatList, Text, View} from 'react-native';
+import {Alert, Button, FlatList, Text} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import BooksApi from '../../api/openlibrary/books';
 import {Book} from '../../api/openlibrary/books/types';
-import BookCover from '../../components/BookCover';
+import BookComponent from '../../components/Book';
+
 import styles from './HomeScreen.styles';
 import {HomeScreenProps} from './HomeScreen.types';
 
@@ -32,14 +33,7 @@ const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
         horizontal
         data={books}
         renderItem={book => {
-          return (
-            <View style={{margin: 5, alignItems: 'center'}}>
-              <BookCover
-                uri={`https://covers.openlibrary.org/b/id/${book.item.coverImageId}-S.jpg`}
-              />
-              <Text style={{color: colors.text}}>{book.item.title}</Text>
-            </View>
-          );
+          return <BookComponent book={book.item} />;
         }}
       />
       <Button
