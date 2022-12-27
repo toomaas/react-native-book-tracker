@@ -1,4 +1,6 @@
+import Work from '../api/openlibrary/works/model/Work';
+
 export type RootNavigationParamList = {
   HomeScreen: undefined;
-  BookScreen: undefined;
+  BookScreen: {work: Work};
 };
