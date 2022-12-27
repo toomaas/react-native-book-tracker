@@ -9,14 +9,6 @@ export default class Work {
   firstPublishYear: number = 0;
   editionCount: number = 0;
 
-  // constructor(work: APIWorkRawResponse) {
-  //   const {title, description, key} = work;
-  //   this.title = title;
-  //   this.key = key;
-  //   this.description = description;
-  //   this.coverImageId = co
-  // }
-
   public static fromAPITrendingWork(apiWork: APITrendingWork): Work {
     const {
       author_name,
@@ -46,7 +38,7 @@ export default class Work {
 
     work.title = title;
     work.key = key;
-    work.description = description;
+    work.description = description.value;
 
     return work;
   }

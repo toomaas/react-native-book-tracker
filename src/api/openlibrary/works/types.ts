@@ -16,5 +16,10 @@ export interface APITrendingWork {
 export interface APIWorkRawResponse {
   title: string;
   key: string;
-  description: string;
+  description: APIWorkDescription;
+}
+
+export interface APIWorkDescription {
+  type: string;
+  value: string;
 }
