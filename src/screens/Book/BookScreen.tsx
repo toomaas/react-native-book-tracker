@@ -1,7 +1,8 @@
 import {useTheme} from '@react-navigation/native';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Alert, Text, View} from 'react-native';
 import WorksApi from '../../api/openlibrary/works';
+import Work from '../../api/openlibrary/works/model/Work';
 import BookCover from '../../components/BookCover';
 import styles from './BookScreen.styles';
 import {BookScreenProps} from './BookScreen.types';
@@ -13,11 +14,13 @@ const HomeScreen: React.FunctionComponent<BookScreenProps> = props => {
     },
   } = props;
 
+  const [workAdditionalInfo, setWorkAdditionalInfo] = useState<Work>();
+
   useEffect(() => {
     (async () => {
       try {
-        const result = await WorksApi().getWork(work.key);
-        console.log(result);
+        const additionalInfo = await WorksApi().getWork(work.key);
+        setWorkAdditionalInfo(additionalInfo.work);
       } catch (error) {
         Alert.alert('Error fetching WORK', JSON.stringify(error));
       }
@@ -27,8 +30,11 @@ const HomeScreen: React.FunctionComponent<BookScreenProps> = props => {
 
   return (
     <View style={styles.container}>
-      <Text style={{color: colors.text}}>Book Screen</Text>
       <BookCover coverId={work.coverImageId} size="M" />
+      <Text style={{color: colors.text}}>{work.title}</Text>
+      <Text style={{color: colors.text}}>
+        {workAdditionalInfo?.description}
+      </Text>
     </View>
   );
 };
