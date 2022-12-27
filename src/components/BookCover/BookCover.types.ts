@@ -1,5 +1,6 @@
 export type BookCoverProps = {
-  uri: string;
+  coverId: number;
+  size: 'S' | 'M' | 'L';
 };
 
 export type ImageDimensions = {

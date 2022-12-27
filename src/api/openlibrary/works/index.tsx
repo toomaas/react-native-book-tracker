@@ -1,3 +1,4 @@
+import {OPEN_LIBRARY_URL} from '@env';
 import APITrendingWorksResponse from './response/TrendingWorksResponse';
 import WorkResponse from './response/WorkResponse';
 import {APITrendingWorksRawResponse, APIWorkRawResponse} from './types';
@@ -8,8 +9,6 @@ export enum TRENDING_SICE_ENUM {
   FOREVER = 'forever',
   // monthly...
 }
-
-const OPEN_LIBRARY_URL = 'https://openlibrary.org';
 
 export default function WorksApi() {
   return {

@@ -28,9 +28,7 @@ const HomeScreen: React.FunctionComponent<BookScreenProps> = props => {
   return (
     <View style={styles.container}>
       <Text style={{color: colors.text}}>Book Screen</Text>
-      <BookCover
-        uri={`https://covers.openlibrary.org/b/id/${work.coverImageId}-M.jpg`}
-      />
+      <BookCover coverId={work.coverImageId} size="M" />
     </View>
   );
 };

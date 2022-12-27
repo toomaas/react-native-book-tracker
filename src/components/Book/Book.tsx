@@ -20,9 +20,7 @@ const Book: React.FunctionComponent<BookProps> = props => {
         navigation.navigate('BookScreen', {work});
       }}>
       <View style={styles.container}>
-        <BookCover
-          uri={`https://covers.openlibrary.org/b/id/${work.coverImageId}-S.jpg`}
-        />
+        <BookCover coverId={work.coverImageId} size="S" />
         <Text style={{color: colors.text}}>{work.title}</Text>
       </View>
     </TouchableOpacity>
