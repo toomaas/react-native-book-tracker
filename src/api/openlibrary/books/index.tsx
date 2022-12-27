@@ -1,5 +1,6 @@
-import APITrendingBooksResponse from './response/APITrendingBooksResponse';
-import {TrendingBooksRawResponse} from './types';
+import APITrendingBooksResponse from './response/TrendingWorksResponse';
+import WorkResponse from './response/WorkResponse';
+import {APITrendingWorksRawResponse, APIWorkRawResponse} from './types';
 
 export enum TRENDING_SICE_ENUM {
   DAILY = 'daily',
@@ -39,12 +40,25 @@ export default function BooksApi() {
         },
       );
       if (response.status >= 200 && response.status < 300) {
-        const jsonResponse: TrendingBooksRawResponse = await response.json();
+        const jsonResponse: APITrendingWorksRawResponse = await response.json();
         return new APITrendingBooksResponse(jsonResponse);
       }
 
       throw response;
     },
-    async,
+    async getWork(key: string): Promise<WorkResponse> {
+      const response = await fetch(`${OPEN_LIBRARY_URL}${key}.json`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+        },
+      });
+      if (response.status >= 200 && response.status < 300) {
+        const jsonResponse: APIWorkRawResponse = await response.json();
+        return new WorkResponse(jsonResponse);
+      }
+
+      throw response;
+    },
   };
 }

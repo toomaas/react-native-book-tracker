@@ -1,6 +1,6 @@
-import Book from '../api/openlibrary/books/model/Book';
+import Work from '../api/openlibrary/books/model/Work';
 
 export type RootNavigationParamList = {
   HomeScreen: undefined;
-  BookScreen: {book: Book};
+  BookScreen: {book: Work};
 };
