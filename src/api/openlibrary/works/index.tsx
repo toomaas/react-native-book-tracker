@@ -1,4 +1,4 @@
-import APITrendingBooksResponse from './response/TrendingWorksResponse';
+import APITrendingWorksResponse from './response/TrendingWorksResponse';
 import WorkResponse from './response/WorkResponse';
 import {APITrendingWorksRawResponse, APIWorkRawResponse} from './types';
 
@@ -11,12 +11,12 @@ export enum TRENDING_SICE_ENUM {
 
 const OPEN_LIBRARY_URL = 'https://openlibrary.org';
 
-export default function BooksApi() {
+export default function WorksApi() {
   return {
     async listTrending(
       limit: number = 5,
       since = TRENDING_SICE_ENUM.WEEKLY,
-    ): Promise<APITrendingBooksResponse> {
+    ): Promise<APITrendingWorksResponse> {
       const searchParams = {
         limit,
       };
@@ -41,12 +41,13 @@ export default function BooksApi() {
       );
       if (response.status >= 200 && response.status < 300) {
         const jsonResponse: APITrendingWorksRawResponse = await response.json();
-        return new APITrendingBooksResponse(jsonResponse);
+        return new APITrendingWorksResponse(jsonResponse);
       }
 
       throw response;
     },
     async getWork(key: string): Promise<WorkResponse> {
+      console.log('key', key);
       const response = await fetch(`${OPEN_LIBRARY_URL}${key}.json`, {
         method: 'GET',
         headers: {

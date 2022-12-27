@@ -1,5 +1,5 @@
-import Work from '../../api/openlibrary/books/model/Work';
+import Work from '../../api/openlibrary/works/model/Work';
 
 export type BookProps = {
-  book: Work;
+  work: Work;
 };

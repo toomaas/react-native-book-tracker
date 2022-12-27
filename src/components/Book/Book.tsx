@@ -7,7 +7,7 @@ import styles from './Book.styles';
 import {BookProps} from './Book.types';
 
 const Book: React.FunctionComponent<BookProps> = props => {
-  const {book} = props;
+  const {work} = props;
   const {colors} = useTheme();
 
   const navigation = useNavigation<HomeScreenPropsNavigationProp>();
@@ -17,13 +17,13 @@ const Book: React.FunctionComponent<BookProps> = props => {
   return (
     <TouchableOpacity
       onPress={() => {
-        navigation.navigate('BookScreen', {book});
+        navigation.navigate('BookScreen', {work});
       }}>
       <View style={styles.container}>
         <BookCover
-          uri={`https://covers.openlibrary.org/b/id/${book.coverImageId}-S.jpg`}
+          uri={`https://covers.openlibrary.org/b/id/${work.coverImageId}-S.jpg`}
         />
-        <Text style={{color: colors.text}}>{book.title}</Text>
+        <Text style={{color: colors.text}}>{work.title}</Text>
       </View>
     </TouchableOpacity>
   );
