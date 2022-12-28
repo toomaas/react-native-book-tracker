@@ -1,5 +1,7 @@
+import {OPEN_LIBRARY_COVERS_URL} from '@env';
 import React, {useEffect, useState} from 'react';
-import {Alert, View} from 'react-native';
+import {Alert, ImageBackground, ScrollView} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import WorksApi from '../../api/openlibrary/works';
 import Work from '../../api/openlibrary/works/model/Work';
 import BookCover from '../../components/BookCover';
@@ -27,12 +29,27 @@ const HomeScreen: React.FunctionComponent<BookScreenProps> = props => {
     })();
   }, [work]);
 
+  const uri = `${OPEN_LIBRARY_COVERS_URL}/b/id/${work.coverImageId}-L.jpg`;
+
   return (
-    <View style={styles.container}>
-      <BookCover coverId={work.coverImageId} size="M" />
-      <Text>{work.title}</Text>
-      <Text>{workAdditionalInfo?.description}</Text>
-    </View>
+    <SafeAreaView edges={['bottom']}>
+      <ScrollView contentContainerStyle={styles.container}>
+        <ImageBackground
+          style={styles.backgroundImage}
+          resizeMode="cover"
+          blurRadius={20}
+          source={{uri}}>
+          <BookCover
+            style={styles.bookCover}
+            coverId={work.coverImageId}
+            size="M"
+          />
+          <Text style={styles.title}>{work.title}</Text>
+          <Text style={styles.author}>by {work.authors[0]}</Text>
+        </ImageBackground>
+        <Text>{workAdditionalInfo?.description}</Text>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
