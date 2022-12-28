@@ -21,7 +21,7 @@ const Book: React.FunctionComponent<BookProps> = props => {
       }}>
       <View style={styles.container}>
         <BookCover coverId={work.coverImageId} size="M" />
-        <Text>{work.title}</Text>
+        <Text style={styles.title}>{work.title}</Text>
       </View>
     </TouchableOpacity>
   );
