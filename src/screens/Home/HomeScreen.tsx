@@ -12,6 +12,7 @@ import {HomeScreenProps} from './HomeScreen.types';
 
 const HomeScreen: React.FunctionComponent<HomeScreenProps> = () => {
   const [works, setWorks] = useState<Work[]>([]);
+  const [works2, setWorks2] = useState<Work[]>([]);
 
   const width = Dimensions.get('window').width;
 
@@ -22,6 +23,14 @@ const HomeScreen: React.FunctionComponent<HomeScreenProps> = () => {
         setWorks(result.works);
       } catch (error) {
         Alert.alert('Error fetching books', JSON.stringify(error));
+      }
+    })();
+    (async () => {
+      try {
+        const result = await WorksApi().getWorksBySubject('love');
+        setWorks2(result.works);
+      } catch (error) {
+        Alert.alert('Error fetching books2', JSON.stringify(error));
       }
     })();
   }, []);
@@ -38,6 +47,19 @@ const HomeScreen: React.FunctionComponent<HomeScreenProps> = () => {
         width={width * 0.7}
         height={width * 0.8}
         data={works}
+        renderItem={work => {
+          return <BookComponent work={work.item} />;
+        }}
+      />
+      <Carousel
+        loop={false}
+        mode="parallax"
+        style={{
+          width: width,
+        }}
+        width={width * 0.7}
+        height={width * 0.8}
+        data={works2}
         renderItem={work => {
           return <BookComponent work={work.item} />;
         }}
