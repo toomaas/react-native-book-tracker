@@ -20,7 +20,7 @@ const Book: React.FunctionComponent<BookProps> = props => {
         navigation.navigate('BookScreen', {work});
       }}>
       <View style={styles.container}>
-        <BookCover coverId={work.coverImageId} size="S" />
+        <BookCover coverId={work.coverImageId} size="M" />
         <Text style={{color: colors.text}}>{work.title}</Text>
       </View>
     </TouchableOpacity>
