@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {Alert, View} from 'react-native';
-import WorksApi from '../../api/openlibrary/works';
-import Work from '../../api/openlibrary/works/model/Work';
-import Text from '../Text';
-import WorkCarousel from '../WorkCarousel';
+import WorksApi from '../../../api/openlibrary/works';
+import Work from '../../../api/openlibrary/works/model/Work';
+import Text from '../../Text';
+import WorkCarousel from '../../WorkCarousel';
 import styles from './TrendingWorks.styles';
 import {TrendingWorksProps} from './TrendingWorks.types';
 

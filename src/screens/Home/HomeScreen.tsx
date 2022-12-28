@@ -3,7 +3,7 @@ import {Alert, ScrollView} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import WorksApi from '../../api/openlibrary/works';
 import Work from '../../api/openlibrary/works/model/Work';
-import TrendingWorks from '../../components/TrendingWorks';
+import TrendingWorks from '../../components/Home/TrendingWorks';
 import WorkCarousel from '../../components/WorkCarousel';
 
 import styles from './HomeScreen.styles';
