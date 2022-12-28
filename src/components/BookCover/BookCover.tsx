@@ -33,7 +33,10 @@ const BookCover: React.FunctionComponent<BookCoverProps> = ({
   return (
     <Image
       source={{uri}}
-      style={[style, {width: dimensions?.width, height: dimensions?.height}]}
+      style={[
+        style,
+        {width: dimensions!.width * 0.83, height: dimensions!.height * 0.83},
+      ]}
     />
   );
 };
