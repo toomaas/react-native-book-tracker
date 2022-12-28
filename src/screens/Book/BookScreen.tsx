@@ -1,9 +1,9 @@
-import {useTheme} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
-import {Alert, Text, View} from 'react-native';
+import {Alert, View} from 'react-native';
 import WorksApi from '../../api/openlibrary/works';
 import Work from '../../api/openlibrary/works/model/Work';
 import BookCover from '../../components/BookCover';
+import Text from '../../components/Text';
 import styles from './BookScreen.styles';
 import {BookScreenProps} from './BookScreen.types';
 
@@ -26,15 +26,12 @@ const HomeScreen: React.FunctionComponent<BookScreenProps> = props => {
       }
     })();
   }, [work]);
-  const {colors} = useTheme();
 
   return (
     <View style={styles.container}>
       <BookCover coverId={work.coverImageId} size="M" />
-      <Text style={{color: colors.text}}>{work.title}</Text>
-      <Text style={{color: colors.text}}>
-        {workAdditionalInfo?.description}
-      </Text>
+      <Text>{work.title}</Text>
+      <Text>{workAdditionalInfo?.description}</Text>
     </View>
   );
 };

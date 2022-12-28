@@ -1,18 +1,16 @@
-import {useTheme} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
-import {Alert, Dimensions, Text} from 'react-native';
+import {Alert, Dimensions} from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import WorksApi from '../../api/openlibrary/works';
 import Work from '../../api/openlibrary/works/model/Work';
 import BookComponent from '../../components/Book';
+import Text from '../../components/Text';
 
 import styles from './HomeScreen.styles';
 import {HomeScreenProps} from './HomeScreen.types';
 
 const HomeScreen: React.FunctionComponent<HomeScreenProps> = () => {
-  const {colors} = useTheme();
-
   const [works, setWorks] = useState<Work[]>([]);
 
   const width = Dimensions.get('window').width;
@@ -30,7 +28,7 @@ const HomeScreen: React.FunctionComponent<HomeScreenProps> = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={{color: colors.text}}>Home Screen</Text>
+      <Text>Home Screen</Text>
       <Carousel
         loop={false}
         mode="parallax"
