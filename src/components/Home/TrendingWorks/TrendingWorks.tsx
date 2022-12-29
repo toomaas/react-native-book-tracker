@@ -2,9 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Alert, View} from 'react-native';
 import WorksApi from '../../../api/openlibrary/works';
 import Work from '../../../api/openlibrary/works/model/Work';
-import Text from '../../Text';
 import WorkCarousel from '../WorkCarousel';
-import styles from './TrendingWorks.styles';
 import {TrendingWorksProps} from './TrendingWorks.types';
 
 const TrendingWorks: React.FunctionComponent<TrendingWorksProps> = () => {
@@ -23,8 +21,7 @@ const TrendingWorks: React.FunctionComponent<TrendingWorksProps> = () => {
 
   return (
     <View>
-      <Text style={styles.headerTitle}>Trending Books</Text>
-      <WorkCarousel works={works} />
+      <WorkCarousel headerTitle="Trending Books" works={works} />
     </View>
   );
 };

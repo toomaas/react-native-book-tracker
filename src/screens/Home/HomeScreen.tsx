@@ -2,23 +2,31 @@ import React, {useEffect, useState} from 'react';
 import {Alert, ScrollView} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import WorksApi from '../../api/openlibrary/works';
-import Work from '../../api/openlibrary/works/model/Work';
 import TrendingWorks from '../../components/Home/TrendingWorks';
 import WorkCarousel from '../../components/Home/WorkCarousel';
 
 import styles from './HomeScreen.styles';
-import {HomeScreenProps} from './HomeScreen.types';
+import {HomeScreenProps, SubjectWorks} from './HomeScreen.types';
+
+const SUBJECTS = ['romance', 'programming', 'classic'];
 
 const HomeScreen: React.FunctionComponent<HomeScreenProps> = () => {
-  const [works2, setWorks2] = useState<Work[]>([]);
+  const [subjectsWorks, setSubjectsWorks] = useState<SubjectWorks[]>();
 
   useEffect(() => {
     (async () => {
       try {
-        const result = await WorksApi().getWorksBySubject('love');
-        setWorks2(result.works);
+        var results: SubjectWorks[] = await Promise.all(
+          SUBJECTS.map(async (subject): Promise<SubjectWorks> => {
+            console.log(subject);
+            const result = await WorksApi().getWorksBySubject(subject);
+            return {subject, works: result.works};
+          }),
+        );
+
+        setSubjectsWorks(results);
       } catch (error) {
-        Alert.alert('Error fetching books2', JSON.stringify(error));
+        Alert.alert('Error fetching subject works', JSON.stringify(error));
       }
     })();
   }, []);
@@ -27,8 +35,12 @@ const HomeScreen: React.FunctionComponent<HomeScreenProps> = () => {
     <SafeAreaView style={styles.container}>
       <ScrollView>
         <TrendingWorks />
-        <WorkCarousel works={works2} />
-        <WorkCarousel works={works2} />
+        {subjectsWorks?.map(subjectWorks => (
+          <WorkCarousel
+            headerTitle={subjectWorks.subject}
+            works={subjectWorks.works}
+          />
+        ))}
       </ScrollView>
     </SafeAreaView>
   );
