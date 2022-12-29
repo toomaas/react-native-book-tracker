@@ -1,7 +1,7 @@
 import React from 'react';
 import {Dimensions} from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
-import BookComponent from '../../Book';
+import BookComponent from '../Book';
 import {WorkCarouselProps} from './WorkCarousel.types';
 
 const WorkCarousel: React.FunctionComponent<WorkCarouselProps> = ({works}) => {

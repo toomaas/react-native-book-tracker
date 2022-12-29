@@ -1,9 +1,9 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useEffect} from 'react';
 import {TouchableOpacity, View} from 'react-native';
-import {HomeScreenPropsNavigationProp} from '../../screens/Home/HomeScreen.types';
-import BookCover from '../BookCover';
-import Text from '../Text';
+import {HomeScreenPropsNavigationProp} from '../../../screens/Home/HomeScreen.types';
+import BookCover from '../../BookCover';
+import Text from '../../Text';
 import styles from './Book.styles';
 import {BookProps} from './Book.types';
 
