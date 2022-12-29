@@ -5,6 +5,7 @@ import {Alert, ImageBackground, ScrollView, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import WorksApi from '../../api/openlibrary/works';
 import Work from '../../api/openlibrary/works/model/Work';
+import WorkPublishDate from '../../components/Book/WorkPublishDate';
 import WorkRating from '../../components/Book/WorkRating';
 import BookCover from '../../components/BookCover';
 import Text from '../../components/Text';
@@ -53,21 +54,15 @@ const HomeScreen: React.FunctionComponent<BookScreenProps> = props => {
         </ImageBackground>
         <View
           style={{
-            flexDirection: 'row',
-            flex: 1,
-            alignContent: 'space-around',
-            margin: 20,
-            backgroundColor: colors.background,
+            ...styles.horizontalContainer,
+            backgroundColor: colors.border,
           }}>
           <WorkRating work={work} />
-          <Text style={{flex: 1, textAlign: 'center'}}>
-            {work.firstPublishYear}
-          </Text>
-          <Text style={{flex: 1, textAlign: 'center'}}>
-            {work.firstPublishYear}
-          </Text>
+          <WorkPublishDate work={work} />
         </View>
-        <Text>{workAdditionalInfo?.description}</Text>
+        <Text style={styles.description}>
+          {workAdditionalInfo?.description}
+        </Text>
       </ScrollView>
     </SafeAreaView>
   );
