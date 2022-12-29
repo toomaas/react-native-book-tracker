@@ -1,40 +1,47 @@
-import {useTheme} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
-import {Alert, FlatList, Text} from 'react-native';
+import {Alert, ScrollView} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import WorksApi from '../../api/openlibrary/works';
-import Work from '../../api/openlibrary/works/model/Work';
-import BookComponent from '../../components/Book';
+import TrendingWorks from '../../components/Home/TrendingWorks';
+import WorkCarousel from '../../components/Home/WorkCarousel';
 
 import styles from './HomeScreen.styles';
-import {HomeScreenProps} from './HomeScreen.types';
+import {HomeScreenProps, SubjectWorks} from './HomeScreen.types';
+
+const SUBJECTS = ['romance', 'programming', 'classic'];
 
 const HomeScreen: React.FunctionComponent<HomeScreenProps> = () => {
-  const {colors} = useTheme();
-
-  const [works, setWorks] = useState<Work[]>([]);
+  const [subjectsWorks, setSubjectsWorks] = useState<SubjectWorks[]>();
 
   useEffect(() => {
     (async () => {
       try {
-        const result = await WorksApi().listTrending();
-        setWorks(result.works);
+        var results: SubjectWorks[] = await Promise.all(
+          SUBJECTS.map(async (subject): Promise<SubjectWorks> => {
+            console.log(subject);
+            const result = await WorksApi().getWorksBySubject(subject);
+            return {subject, works: result.works};
+          }),
+        );
+
+        setSubjectsWorks(results);
       } catch (error) {
-        Alert.alert('Error fetching books', JSON.stringify(error));
+        Alert.alert('Error fetching subject works', JSON.stringify(error));
       }
     })();
   }, []);
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={{color: colors.text}}>Home Screen</Text>
-      <FlatList
-        horizontal
-        data={works}
-        renderItem={book => {
-          return <BookComponent work={book.item} />;
-        }}
-      />
+      <ScrollView>
+        <TrendingWorks />
+        {subjectsWorks?.map(subjectWorks => (
+          <WorkCarousel
+            headerTitle={subjectWorks.subject}
+            works={subjectWorks.works}
+          />
+        ))}
+      </ScrollView>
     </SafeAreaView>
   );
 };

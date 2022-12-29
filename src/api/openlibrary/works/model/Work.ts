@@ -1,4 +1,4 @@
-import {APIWorkRawResponse, APITrendingWork} from '../types';
+import {APISubjectWork, APITrendingWork, APIWorkRawResponse} from '../types';
 
 export default class Work {
   title: string = '';
@@ -38,7 +38,28 @@ export default class Work {
 
     work.title = title;
     work.key = key;
-    work.description = description.value;
+
+    if (typeof description === 'string') {
+      work.description = description;
+    } else {
+      work.description = description.value;
+    }
+
+    return work;
+  }
+
+  public static fromSubjectWork(apiWork: APISubjectWork): Work {
+    const {key, title, authors, cover_id, edition_count, first_publish_year} =
+      apiWork;
+
+    const work = new Work();
+
+    work.title = title;
+    work.key = key;
+    work.coverImageId = cover_id;
+    work.editionCount = edition_count;
+    work.firstPublishYear = first_publish_year;
+    work.authors = authors.map(author => author.name);
 
     return work;
   }

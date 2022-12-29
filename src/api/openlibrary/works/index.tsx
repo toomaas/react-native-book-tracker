@@ -1,7 +1,15 @@
 import {OPEN_LIBRARY_URL} from '@env';
+import StringUtils from '../../../utils/StringUtils';
+import SubjectWorksResponse from './response/SubjectWorksResponse';
 import APITrendingWorksResponse from './response/TrendingWorksResponse';
+import WorkRatingsResponse from './response/WorkRatingsResponse';
 import WorkResponse from './response/WorkResponse';
-import {APITrendingWorksRawResponse, APIWorkRawResponse} from './types';
+import {
+  APITrendingWorksRawResponse,
+  APIWorkRatingsRawResponse,
+  APIWorkRawResponse,
+  APIWorksBySubjectRawResponse,
+} from './types';
 
 export enum TRENDING_SICE_ENUM {
   DAILY = 'daily',
@@ -20,14 +28,8 @@ export default function WorksApi() {
         limit,
       };
 
-      const searchParamsString = Object.keys(searchParams)
-        .map((key: string) => {
-          return `${encodeURIComponent(key)}=${encodeURIComponent(
-            // @ts-ignore
-            searchParams[key],
-          )}`;
-        })
-        .join('&');
+      const searchParamsString =
+        StringUtils.getSearchParamsStringFromObj(searchParams);
 
       const response = await fetch(
         `${OPEN_LIBRARY_URL}/trending/${since}.json?${searchParamsString}`,
@@ -46,7 +48,6 @@ export default function WorksApi() {
       throw response;
     },
     async getWork(key: string): Promise<WorkResponse> {
-      console.log('key', key);
       const response = await fetch(`${OPEN_LIBRARY_URL}${key}.json`, {
         method: 'GET',
         headers: {
@@ -56,6 +57,48 @@ export default function WorksApi() {
       if (response.status >= 200 && response.status < 300) {
         const jsonResponse: APIWorkRawResponse = await response.json();
         return new WorkResponse(jsonResponse);
+      }
+
+      throw response;
+    },
+    async getWorksBySubject(
+      subject: string,
+      limit: number = 5,
+    ): Promise<SubjectWorksResponse> {
+      const searchParams = {
+        limit,
+      };
+
+      const searchParamsString =
+        StringUtils.getSearchParamsStringFromObj(searchParams);
+
+      const response = await fetch(
+        `${OPEN_LIBRARY_URL}/subjects/${subject}.json?${searchParamsString}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+          },
+        },
+      );
+      if (response.status >= 200 && response.status < 300) {
+        const jsonResponse: APIWorksBySubjectRawResponse =
+          await response.json();
+        return new SubjectWorksResponse(jsonResponse);
+      }
+
+      throw response;
+    },
+    async getWorkRatings(key: string): Promise<WorkRatingsResponse> {
+      const response = await fetch(`${OPEN_LIBRARY_URL}${key}/ratings.json?`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+        },
+      });
+      if (response.status >= 200 && response.status < 300) {
+        const jsonResponse: APIWorkRatingsRawResponse = await response.json();
+        return new WorkRatingsResponse(jsonResponse);
       }
 
       throw response;

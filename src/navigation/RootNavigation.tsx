@@ -34,7 +34,11 @@ const RootNavigation: React.FunctionComponent = () => {
             component={HomeScreen}
             options={{headerShown: false}}
           />
-          <Stack.Screen name="BookScreen" component={BookScreen} />
+          <Stack.Screen
+            name="BookScreen"
+            component={BookScreen}
+            options={({route}) => ({title: route.params.work.title})}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
