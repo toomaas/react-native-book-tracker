@@ -2,9 +2,11 @@ import {OPEN_LIBRARY_URL} from '@env';
 import StringUtils from '../../../utils/StringUtils';
 import SubjectWorksResponse from './response/SubjectWorksResponse';
 import APITrendingWorksResponse from './response/TrendingWorksResponse';
+import WorkRatingsResponse from './response/WorkRatingsResponse';
 import WorkResponse from './response/WorkResponse';
 import {
   APITrendingWorksRawResponse,
+  APIWorkRatingsRawResponse,
   APIWorkRawResponse,
   APIWorksBySubjectRawResponse,
 } from './types';
@@ -83,6 +85,20 @@ export default function WorksApi() {
         const jsonResponse: APIWorksBySubjectRawResponse =
           await response.json();
         return new SubjectWorksResponse(jsonResponse);
+      }
+
+      throw response;
+    },
+    async getWorkRatings(key: string): Promise<WorkRatingsResponse> {
+      const response = await fetch(`${OPEN_LIBRARY_URL}${key}/ratings.json?`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+        },
+      });
+      if (response.status >= 200 && response.status < 300) {
+        const jsonResponse: APIWorkRatingsRawResponse = await response.json();
+        return new WorkRatingsResponse(jsonResponse);
       }
 
       throw response;

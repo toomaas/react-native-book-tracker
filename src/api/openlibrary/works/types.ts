@@ -41,3 +41,12 @@ export interface APISubjectWorkAuthor {
   key: string;
   name: string;
 }
+
+export interface APIWorkRatingsRawResponse {
+  summary: APIWorkRatingsSummary;
+}
+
+export interface APIWorkRatingsSummary {
+  average: number;
+  count: number;
+}
