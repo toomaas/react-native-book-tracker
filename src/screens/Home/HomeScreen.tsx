@@ -18,7 +18,6 @@ const HomeScreen: React.FunctionComponent<HomeScreenProps> = () => {
       try {
         var results: SubjectWorks[] = await Promise.all(
           SUBJECTS.map(async (subject): Promise<SubjectWorks> => {
-            console.log(subject);
             const result = await WorksApi().getWorksBySubject(subject);
             return {subject, works: result.works};
           }),
@@ -37,6 +36,7 @@ const HomeScreen: React.FunctionComponent<HomeScreenProps> = () => {
         <TrendingWorks />
         {subjectsWorks?.map(subjectWorks => (
           <WorkCarousel
+            key={`${subjectWorks.subject}-carousel`}
             headerTitle={subjectWorks.subject}
             works={subjectWorks.works}
           />

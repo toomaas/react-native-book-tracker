@@ -29,7 +29,12 @@ const WorkCarousel: React.FunctionComponent<WorkCarouselProps> = ({
         height={height * 0.3}
         data={works}
         renderItem={work => {
-          return <BookComponent work={work.item} />;
+          return (
+            <BookComponent
+              key={`${headerTitle}-${work.item.title}`}
+              work={work.item}
+            />
+          );
         }}
       />
     </View>
