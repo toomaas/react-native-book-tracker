@@ -60,9 +60,13 @@ const HomeScreen: React.FunctionComponent<BookScreenProps> = props => {
           <WorkRating work={work} />
           <WorkPublishDate work={work} />
         </View>
-        <Text style={styles.description}>
-          {workAdditionalInfo?.description}
-        </Text>
+        {workAdditionalInfo?.description ? (
+          <Text style={styles.description}>
+            {workAdditionalInfo?.description}
+          </Text>
+        ) : (
+          <Text style={styles.description}>No description available</Text>
+        )}
       </ScrollView>
     </SafeAreaView>
   );
