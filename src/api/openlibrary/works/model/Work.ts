@@ -35,14 +35,15 @@ export default class Work {
     const {description, key, title} = apiWork;
 
     const work = new Work();
-
     work.title = title;
     work.key = key;
 
-    if (typeof description === 'string') {
-      work.description = description;
-    } else {
-      work.description = description.value;
+    if (description) {
+      if (typeof description === 'string') {
+        work.description = description;
+      } else {
+        work.description = description.value;
+      }
     }
 
     return work;
