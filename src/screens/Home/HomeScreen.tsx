@@ -6,9 +6,13 @@ import TrendingWorks from '../../components/Home/TrendingWorks';
 import WorkCarousel from '../../components/Home/WorkCarousel';
 
 import styles from './HomeScreen.styles';
-import {HomeScreenProps, SubjectWorks} from './HomeScreen.types';
+import {HomeScreenProps, Subjects, SubjectWorks} from './HomeScreen.types';
 
-const SUBJECTS = ['romance', 'programming', 'classic'];
+const SUBJECTS: Subjects = {
+  romance: {title: 'Romance'},
+  programming: {title: 'Programming'},
+  classic: {title: 'Classic'},
+};
 
 const HomeScreen: React.FunctionComponent<HomeScreenProps> = () => {
   const [subjectsWorks, setSubjectsWorks] = useState<SubjectWorks[]>();
@@ -17,7 +21,7 @@ const HomeScreen: React.FunctionComponent<HomeScreenProps> = () => {
     (async () => {
       try {
         var results: SubjectWorks[] = await Promise.all(
-          SUBJECTS.map(async (subject): Promise<SubjectWorks> => {
+          Object.keys(SUBJECTS).map(async (subject): Promise<SubjectWorks> => {
             const result = await WorksApi().getWorksBySubject(subject);
             return {subject, works: result.works};
           }),
@@ -37,7 +41,7 @@ const HomeScreen: React.FunctionComponent<HomeScreenProps> = () => {
         {subjectsWorks?.map(subjectWorks => (
           <WorkCarousel
             key={`${subjectWorks.subject}-carousel`}
-            headerTitle={subjectWorks.subject}
+            headerTitle={SUBJECTS[subjectWorks.subject].title}
             works={subjectWorks.works}
           />
         ))}

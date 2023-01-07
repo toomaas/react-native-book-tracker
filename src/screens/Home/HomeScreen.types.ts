@@ -16,6 +16,10 @@ export type HomeScreenPropsNavigationProp = NativeStackNavigationProp<
   'HomeScreen'
 >;
 
+type Subject = {title: string};
+
+export type Subjects = Record<string, Subject>;
+
 export type SubjectWorks = {
   subject: string;
   works: Work[];
