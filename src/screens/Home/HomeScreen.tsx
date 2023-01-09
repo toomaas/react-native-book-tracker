@@ -1,11 +1,10 @@
-import React, {useEffect, useState} from 'react';
-import {Alert, ScrollView} from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
+import {Alert, Animated, ScrollView} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import WorksApi from '../../api/openlibrary/works';
+import Header from '../../components/Home/Header';
 import TrendingWorks from '../../components/Home/TrendingWorks';
 import WorkCarousel from '../../components/Home/WorkCarousel';
-
-import styles from './HomeScreen.styles';
 import {HomeScreenProps, Subjects, SubjectWorks} from './HomeScreen.types';
 
 const SUBJECTS: Subjects = {
@@ -16,6 +15,8 @@ const SUBJECTS: Subjects = {
 
 const HomeScreen: React.FunctionComponent<HomeScreenProps> = () => {
   const [subjectsWorks, setSubjectsWorks] = useState<SubjectWorks[]>();
+
+  const offset = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     (async () => {
@@ -35,8 +36,14 @@ const HomeScreen: React.FunctionComponent<HomeScreenProps> = () => {
   }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView>
+    <SafeAreaView edges={['bottom']}>
+      <Header animatedValue={offset} />
+      <ScrollView
+        scrollEventThrottle={1}
+        onScroll={Animated.event(
+          [{nativeEvent: {contentOffset: {y: offset}}}],
+          {useNativeDriver: false},
+        )}>
         <TrendingWorks />
         {subjectsWorks?.map(subjectWorks => (
           <WorkCarousel
