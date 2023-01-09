@@ -41,6 +41,7 @@
   },
   "jest": {
     "preset": "react-native",
+    "timers": "fake",
     "moduleFileExtensions": [
       "ts",
       "tsx",

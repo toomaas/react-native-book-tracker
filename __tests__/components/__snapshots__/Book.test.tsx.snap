@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WorkCarousel Component renders correctly 1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "opacity": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+      }
+    }
+  >
+    <ActivityIndicator />
+    <Text
+      style={
+        Array [
+          Object {
+            "fontSize": 16,
+            "marginTop": 5,
+          },
+          Object {
+            "color": "rgb(28, 28, 30)",
+          },
+        ]
+      }
+    >
+      It Ends With Us
+    </Text>
+  </View>
+</View>
+`;
