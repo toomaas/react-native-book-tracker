@@ -15,7 +15,7 @@ const WorkRating: React.FunctionComponent<WorkRatingProps> = props => {
   useEffect(() => {
     (async () => {
       try {
-        const result = await WorksApi().getWorkRatings(key);
+        const result = await WorksApi.getInstance().getWorkRatings(key);
         setAverageRating(result.average);
       } catch (error) {
         Alert.alert('Error fetching books', JSON.stringify(error));

@@ -26,7 +26,7 @@ const HomeScreen: React.FunctionComponent<BookScreenProps> = props => {
   useEffect(() => {
     (async () => {
       try {
-        const additionalInfo = await WorksApi().getWork(work.key);
+        const additionalInfo = await WorksApi.getInstance().getWork(work.key);
         setWorkAdditionalInfo(additionalInfo.work);
       } catch (error) {
         Alert.alert('Error fetching WORK', JSON.stringify(error));
