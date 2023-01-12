@@ -18,7 +18,9 @@ const HomeScreen: React.FunctionComponent<HomeScreenProps> = () => {
       try {
         var results: SubjectWorks[] = await Promise.all(
           SUBJECTS.map(async (subject): Promise<SubjectWorks> => {
-            const result = await WorksApi().getWorksBySubject(subject);
+            const result = await WorksApi.getInstance().getWorksBySubject(
+              subject,
+            );
             return {subject, works: result.works};
           }),
         );

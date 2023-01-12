@@ -11,7 +11,7 @@ const TrendingWorks: React.FunctionComponent<TrendingWorksProps> = () => {
   useEffect(() => {
     (async () => {
       try {
-        const result = await WorksApi().listTrending();
+        const result = await WorksApi.getInstance().listTrending();
         setWorks(result.works);
       } catch (error) {
         Alert.alert('Error fetching books', JSON.stringify(error));
