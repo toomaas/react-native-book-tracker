@@ -16,8 +16,6 @@ const FavouriteButton: React.FunctionComponent<
   const favourites = useSelector((state: RootState) => state.book.favourites);
   const dispatch = useDispatch();
 
-  console.log(favourites);
-
   const isFavourite = favourites.includes(key);
 
   return (
