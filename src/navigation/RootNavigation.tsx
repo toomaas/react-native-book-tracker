@@ -8,6 +8,7 @@ import React from 'react';
 import {StatusBar, useColorScheme} from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import BookScreen from '../screens/Book';
+import FavouritesScreen from '../screens/Favourites';
 import HomeScreen from '../screens/Home';
 import {Colors} from '../styles';
 import {RootNavigationParamList} from './RootNavigation.types';
@@ -39,6 +40,7 @@ const RootNavigation: React.FunctionComponent = () => {
             component={BookScreen}
             options={({route}) => ({title: route.params.work.title})}
           />
+          <Stack.Screen name="FavouritesScreen" component={FavouritesScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
